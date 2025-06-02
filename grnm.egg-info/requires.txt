@@ -1,0 +1,10 @@
+numpy>=1.22.0
+pandas==2.0.3
+python-louvain==0.16
+matplotlib==3.7.2
+networkx==3.2.1
+scikit-learn
+torch==2.2.1
+dgl
+umap-learn==0.5.3
+seaborn==0.13.2
