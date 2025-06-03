@@ -20,8 +20,11 @@ A series of functions are provided to generate various plots, encapsulating diff
 
 By following these steps and utilizing the provided functions, users can gain insights into the characteristics and dynamics of the gene regulatory networks under study.
 
+Gene Matching Heatmap
 ![示例图1](png/1.png)
+Global Gene Regulatory Network
 ![示例图2](png/2.png)
+Gene-Centered Regulatory Subnetwork
 ![示例图3](png/3.png)
 
 ## Pre-requisites
