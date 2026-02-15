@@ -59,6 +59,18 @@ To ensure a smooth installation and operation of our software, please follow the
   ```bash
   pip install grnm
   ```
+
+- ## R Code Execution
+- You may follow the step-by-step workflow below, or directly run `myfinal.R`.
+1. Read RNA and ATAC raw matrices  
+2. Construct the Seurat multi-omics object  
+3. Define candidate regulatory regions (excluding exons)  
+4. Create the RegulatoryNetwork framework  
+5. Perform motif scanning  
+6. Establish peak–gene links  
+7. Infer TF → gene regulatory relationships using GLM  
+8. Identify regulatory modules  
+9. Export the regulatory network results
   ## example
 - [example Notebook](notebooks/example.ipynb)
 
