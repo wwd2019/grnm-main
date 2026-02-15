@@ -60,7 +60,7 @@ To ensure a smooth installation and operation of our software, please follow the
   pip install grnm
   ```
 
-- ## R Code Execution
+ ### R Code Execution
 - You may follow the step-by-step workflow below, or directly run `myfinal.R`.
 1. Read RNA and ATAC raw matrices  
 2. Construct the Seurat multi-omics object  
@@ -71,6 +71,7 @@ To ensure a smooth installation and operation of our software, please follow the
 7. Infer TF → gene regulatory relationships using GLM  
 8. Identify regulatory modules  
 9. Export the regulatory network results
-  ## example
+  ### example
 - [example Notebook](notebooks/example.ipynb)
+
 
