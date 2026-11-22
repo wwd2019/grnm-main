@@ -1,4 +1,0 @@
-clustering
-dimensionality_reduction
-grnm
-plotting
