@@ -1,0 +1,112 @@
+NOTEBOOK 01_data_processing.ipynb
+Package: /home/wwd/py_code/wwd/dongyifei_final/grnm-main
+Python: 3.11.18
+Directories available: True
+Candidate table      dataset/inputs/PRIORITY_with_strong_local_DA_peak.tsv  exists=True
+Pando network        results/pando/TF_gene_network.csv  exists=True
+Model weights        results/model/model.pt  exists=True
+SCENIC summaries     results/scenic/full/pruning_summary.json  exists=True
+{
+  "attempted_targets": 3846,
+  "fitted_targets": 3446,
+  "invalid_inference_models": 0,
+  "coefficient_tests": 1141828,
+  "significant_region_edges": 62354,
+  "TF_gene_edges": 49764,
+  "TFs": 738,
+  "target_genes": 3383,
+  "gene_modules": 1392,
+  "method": "Original Gaussian identity GLM; unscaled TF-expression x accessibility interactions",
+  "FDR": "BH across all estimable coefficients; threshold 0.05",
+  "TF_gene_pvalues": "pval_min and padj_min summarize significant region-level tests, not joint TF-gene tests",
+  "paper_features": 4342,
+  "features_without_v86_annotation": 496,
+  "models_with_aliased_terms": 3125,
+  "regulators_without_v86_target_names": 4,
+  "upstream_QC_label_field": "WGCNAcluster",
+  "method_deviation": "User-approved public WGCNAcluster labels replace unavailable author MainCellType labels in upstream rank-expression multinomial LASSO QC."
+}
+TF–gene rows: 49764 regional significant rows: 62354
+TFs: 738 target genes: 3383
+  tf target  estimate  n_regions     padj_min
+GLI3   HES4 -0.501652          1 1.656614e-02
+GLI3   PAX6  0.109316          1 7.614250e-08
+GRNBoost2 feature edges: 626359
+Model features: target degree excluding queried edge; RNA correlation; GRNBoost2 importance; motif similarity; TF and target in-degree
+PASSED 01_data_processing.ipynb
+NOTEBOOK 02_model_training.ipynb
+Package: /home/wwd/py_code/wwd/dongyifei_final/grnm-main
+Python: 3.11.18
+Directories available: True
+{
+  "seed": 42,
+  "common_genes": 1794,
+  "benchmark_positive": 48,
+  "train_TFs": 306,
+  "validation_TFs": 49,
+  "test_TFs": 49,
+  "train_edges": 5018,
+  "selected_model": "GRNM_32_drop0.1",
+  "selected_epoch": 20,
+  "selection": "mean per-TF AP on validation TFs; architecture & epoch chosen without GLI3 candidate table",
+  "negative_sampling": "four random unlisted pairs per known Pando edge, not verified negatives",
+  "train_features": "target degree excluding queried edge; RNA correlation; GRNBoost2 importance; motif similarity; TF and target in-degree",
+  "heldout_features": "all outgoing edges of validation TFs, test TFs and GLI3 excluded before feature construction",
+  "seed_rank_note": "Pando seed only reranking, full scores have no significance or motif-pruning cutoff"
+}
+         method      split  TFs  mean_AP  mean_hits_top10
+GRNM_32_drop0.1 validation   49 0.258688         3.346939
+GRNM_32_drop0.1       test   49 0.285040         3.551020
+Training skipped; set RUN_MODEL_TRAINING=1 to train in a new directory.
+Targets: 1794 maximum absolute score difference: 1.3776245122443243e-07
+target    score
+  HES5 0.942408
+  PAX6 0.937604
+  LHX2 0.923951
+ DACH1 0.923514
+  HES4 0.923230
+   ID4 0.922542
+ZBTB16 0.919254
+  SOX9 0.901088
+ FOXG1 0.898161
+ NR2F1 0.894505
+PASSED 02_model_training.ipynb
+NOTEBOOK 03_model_results.ipynb
+03_model_results.ipynb:cell_3:5: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+03_model_results.ipynb:cell_5:4: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+Package: /home/wwd/py_code/wwd/dongyifei_final/grnm-main
+Python: 3.11.18
+Directories available: True
+ rank target    score   hit  pando_seed
+    1   HES5 0.942408  True       False
+    2   PAX6 0.937604  True        True
+    3   LHX2 0.923951 False       False
+    4  DACH1 0.923514 False       False
+    5   HES4 0.923230  True        True
+    6    ID4 0.922542 False        True
+    7 ZBTB16 0.919254 False       False
+    8   SOX9 0.901088 False       False
+    9  FOXG1 0.898161 False       False
+   10  NR2F1 0.894505 False       False
+Displayed first-layer targets: 80 second-layer candidates: 30
+PASSED 03_model_results.ipynb
+NOTEBOOK 04_baseline_comparison.ipynb
+04_baseline_comparison.ipynb:cell_10:9: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+Package: /home/wwd/py_code/wwd/dongyifei_final/grnm-main
+Python: 3.11.18
+Directories available: True
+Pruning: {'modules': 4788, 'motif_rows': 2799, 'regulons': 377, 'regulon_TFs': 377, 'GLI3_regulons': [], 'NES_threshold': 3.0, 'rank_threshold': 5000, 'AUC_threshold': 0.05}
+AUCell: {'cells': 9327, 'ranking_genes': 33538, 'regulons': 377, 'matrix_shape': [9327, 377], 'AUCell_auc_threshold': 0.05, 'seed': 42, 'weighted': False, 'normalize': False, 'GLI3_regulons': [], 'detected_genes_quantiles': {'1%': 1663.04, '5%': 2489.0, '50%': 4745.0}}
+AUCell shape: (9327, 377) GLI3 columns: []
+GLI3 : 0 regulons; 0 distinct targets
+HES5 : 1 regulons; 456 distinct targets
+PAX6 : 1 regulons; 296 distinct targets
+Common genes: 1794 candidates in table: 158 candidates in common: 48
+                         method  ranked_targets  hits_top10        hit_genes  HES4_rank  HES5_rank
+                 Pando baseline              50           2       PAX6, HES5         26        9.0
+SCENIC (before motif filtering)             309           2       GPC6, PAX6        130       19.0
+                      pando+GRN            1794           3 HES5, PAX6, HES4          5        1.0
+Saved: /home/wwd/py_code/wwd/dongyifei_final/grnm-main/results/generated/four_step_comparison.tsv
+SCENIC recomputation skipped; set RUN_SCENIC_STAGE to one of: grn, modules, prune, aucell
+PASSED 04_baseline_comparison.ipynb
+All notebook cell sources passed direct execution; Jupyter kernel not tested.
