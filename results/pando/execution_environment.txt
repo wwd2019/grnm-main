@@ -1,0 +1,4 @@
+R version 4.2.3 (2023-03-15)
+R_home=/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R
+conda_environment=spatialz
+recorded_Asia_Shanghai=2026-11-05 11:20:35 CST
