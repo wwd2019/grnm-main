@@ -1,0 +1,4 @@
+NES_cutoff	annotation_filter	motif_module_rows	motif_supported_targets_all	targets_in_universe	top_k	hits	hit_genes	HES4_rank	HES5_rank
+3.0	all_annotations	0	0	0	0				
+2.0	all_annotations	3	41	16	10	1.0	GPC6		
+1.9	direct_only	1	234	60	10	1.0	GPC6		

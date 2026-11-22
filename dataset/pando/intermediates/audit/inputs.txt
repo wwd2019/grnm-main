@@ -1,0 +1,183 @@
+INPUT AUDIT; no expression transfer or model fitting
+Seurat 5.4.0 
+Signac 1.16.0 
+Pando 1.1.1 
+GenomicRanges 1.50.2 
+BSgenome.Hsapiens.UCSC.hg38 1.4.5 
+EnsDb.Hsapiens.v86 2.99.0 
+reticulate 1.45.0 
+igraph 2.2.3 
+
+FILE ATAC_all_merged_srt.rds 
+class Seurat dim 362497 38957 
+assays peaks RNA 
+metadata orig.ident nCount_peaks nFeature_peaks total duplicate chimeric unmapped lowmapq mitochondrial passed_filters cell_id is__cell_barcode TSS_fragments DNase_sensitive_region_fragments enhancer_region_fragments promoter_region_fragments on_target_fragments blacklist_region_fragments peak_region_fragments peak_region_cutsites nucleosome_signal nucleosome_percentile pct_reads_in_peaks blacklist_ratio nucleosome_group TSS.enrichment TSS.percentile high_tss peaks_snn_res.0.8 seurat_clusters nCount_RNA nFeature_RNA batch organoid age age_integrate modality line p_singlet 
+reductions lsi umap 
+assay peaks class Assay dim 362497 38957 
+assay RNA class Assay dim 19805 38957 
+commands RunUMAP.peaks.lsi 
+
+FILE RNA_all_merged_srt.rds 
+class Seurat dim 25540 50000 
+assays RNA SCT 
+metadata orig.ident nCount_RNA nFeature_RNA percent_mito RNA_snn_res.0.8 seurat_clusters nCount_SCT nFeature_SCT SCT_snn_res.0.8 organoid batch modality age age_integrate line p_singlet 
+reductions pca umap 
+assay RNA class Assay dim 33538 50000 
+assay SCT class Assay dim 25540 50000 
+commands NormalizeData.RNA FindVariableFeatures.RNA ScaleData.RNA SCTransform.RNA NormalizeData.SCT RunPCA.SCT FindNeighbors.SCT.pca FindClusters RunUMAP.SCT.pca 
+
+FILE lines12_RNATAC16_26_integrated_v3scores_srt.rds 
+class Seurat dim 38224 23508 
+assays RNA integrated 
+metadata orig.ident nCount_RNA nFeature_RNA nCount_ATAC nFeature_ATAC percent_mito RNA.weight ATAC.weight wsnn_res.0.8 seurat_clusters nCount_peaks nFeature_peaks dataset demux_modality line best p_singlet demux_call RNA_snn_res.0.8 organoid age nowakowski_prediction RNA_snn_res.1 glyc_cluster nepi pseudocell pseudotime_ranks lineage lineage_coarse S.Score G2M.Score Phase group integrated_snn_res.0.8 DV_score_ridge midbrain_prob_ridge hindbrain_prob_ridge forebrain_prob_ridge predicted.id prediction.score.Hindbrain prediction.score.Forebrain prediction.score.Midbrain prediction.score.max prediction.score.ventral prediction.score.dorsal DV_score_css forebrain_prob_css hindbrain_prob_css midbrain_prob_css 
+reductions pca umap proj_css_m proj_css_pca_m 
+assay RNA class Assay dim 38224 23508 
+assay integrated class Assay dim 582 23508 
+commands FindIntegrationAnchors withCallingHandlers ScaleData.integrated RunPCA.integrated FindNeighbors.integrated.pca FindClusters RunUMAP.integrated.pca 
+
+RNA/ATAC shared barcodes 0 
+GRanges object with 3021151 ranges and 5 metadata columns:
+                  seqnames        ranges strand |           tx_id   gene_name
+                     <Rle>     <IRanges>  <Rle> |     <character> <character>
+  ENSE00001489430     chrX 276322-276394      + | ENST00000399012      PLCXD1
+  ENSE00001536003     chrX 276324-276394      + | ENST00000484611      PLCXD1
+  ENSE00002160563     chrX 276353-276394      + | ENST00000430923      PLCXD1
+  ENSE00001750899     chrX 281055-281121      + | ENST00000445062      PLCXD1
+  ENSE00001489388     chrX 281192-281684      + | ENST00000381657      PLCXD1
+              ...      ...           ...    ... .             ...         ...
+  ENST00000361739     chrM     7586-8269      + | ENST00000361739      MT-CO2
+  ENST00000361789     chrM   14747-15887      + | ENST00000361789      MT-CYB
+  ENST00000361851     chrM     8366-8572      + | ENST00000361851     MT-ATP8
+  ENST00000361899     chrM     8527-9207      + | ENST00000361899     MT-ATP6
+  ENST00000362079     chrM     9207-9990      + | ENST00000362079      MT-CO3
+                          gene_id   gene_biotype     type
+                      <character>    <character> <factor>
+  ENSE00001489430 ENSG00000182378 protein_coding     exon
+  ENSE00001536003 ENSG00000182378 protein_coding     exon
+  ENSE00002160563 ENSG00000182378 protein_coding     exon
+  ENSE00001750899 ENSG00000182378 protein_coding     exon
+  ENSE00001489388 ENSG00000182378 protein_coding     exon
+              ...             ...            ...      ...
+  ENST00000361739 ENSG00000198712 protein_coding      cds
+  ENST00000361789 ENSG00000198727 protein_coding      cds
+  ENST00000361851 ENSG00000228253 protein_coding      cds
+  ENST00000361899 ENSG00000198899 protein_coding      cds
+  ENST00000362079 ENSG00000198938 protein_coding      cds
+  -------
+  seqinfo: 25 sequences (1 circular) from hg38 genome
+Seqinfo object with 25 sequences (1 circular) from hg38 genome:
+  seqnames seqlengths isCircular genome
+  chrX      156040895      FALSE   hg38
+  chr20      64444167      FALSE   hg38
+  chr1      248956422      FALSE   hg38
+  chr6      170805979      FALSE   hg38
+  chr3      198295559      FALSE   hg38
+  ...             ...        ...    ...
+  chrY       57227415      FALSE   hg38
+  chr18      80373285      FALSE   hg38
+  chr15     101991189      FALSE   hg38
+  chr21      46709983      FALSE   hg38
+  chrM          16569       TRUE   hg38
+R version 4.2.3 (2023-03-15)
+Platform: x86_64-conda-linux-gnu (64-bit)
+Running under: Ubuntu 24.04.3 LTS
+
+Matrix products: default
+BLAS/LAPACK: /home/wwd/miniconda3/envs/seurat4_env_restored/lib/libopenblasp-r0.3.30.so
+
+locale:
+[1] C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] Signac_1.16.0      Seurat_5.4.0       SeuratObject_5.3.0 sp_2.2-1          
+
+loaded via a namespace (and not attached):
+  [1] spatstat.explore_3.8-0            Pando_1.1.1                      
+  [3] reticulate_1.45.0                 tidyselect_1.2.1                 
+  [5] RSQLite_2.3.4                     AnnotationDbi_1.60.0             
+  [7] htmlwidgets_1.6.4                 grid_4.2.3                       
+  [9] BiocParallel_1.32.5               Rtsne_0.17                       
+ [11] codetools_0.2-20                  ica_1.0-3                        
+ [13] future_1.70.0                     miniUI_0.1.2                     
+ [15] withr_3.0.2                       spatstat.random_3.4-5            
+ [17] colorspace_2.1-0                  progressr_0.19.0                 
+ [19] filelock_1.0.3                    Biobase_2.58.0                   
+ [21] stats4_4.2.3                      ROCR_1.0-12                      
+ [23] tensor_1.5.1                      listenv_0.10.1                   
+ [25] MatrixGenerics_1.10.0             GenomeInfoDbData_1.2.9           
+ [27] otel_0.2.0                        polyclip_1.10-7                  
+ [29] bit64_4.6.0-1                     farver_2.1.2                     
+ [31] parallelly_1.46.1                 vctrs_0.7.2                      
+ [33] generics_0.1.4                    BiocFileCache_2.6.0              
+ [35] R6_2.6.1                          GenomeInfoDb_1.34.9              
+ [37] graphlayouts_1.1.0                spatstat.univar_3.1-7            
+ [39] pals_1.8                          AnnotationFilter_1.22.0          
+ [41] bitops_1.0-9                      spatstat.utils_3.2-2             
+ [43] cachem_1.1.0                      DelayedArray_0.24.0              
+ [45] promises_1.5.0                    BiocIO_1.8.0                     
+ [47] scales_1.4.0                      ggraph_2.1.0                     
+ [49] gtable_0.3.6                      globals_0.19.1                   
+ [51] goftest_1.2-3                     spam_2.11-3                      
+ [53] tidygraph_1.3.0                   ensembldb_2.22.0                 
+ [55] S7_0.2.1                          rlang_1.2.0                      
+ [57] RcppRoll_0.3.2                    splines_4.2.3                    
+ [59] rtracklayer_1.58.0                lazyeval_0.2.3                   
+ [61] dichromat_2.0-0.1                 spatstat.geom_3.7-3              
+ [63] yaml_2.3.12                       reshape2_1.4.5                   
+ [65] abind_1.4-8                       GenomicFeatures_1.50.2           
+ [67] httpuv_1.6.15                     tools_4.2.3                      
+ [69] ggplot2_4.0.2                     RColorBrewer_1.1-3               
+ [71] BiocGenerics_0.44.0               ggridges_0.5.7                   
+ [73] Rcpp_1.1.1                        plyr_1.8.9                       
+ [75] progress_1.2.3                    sparseMatrixStats_1.10.0         
+ [77] zlibbioc_1.44.0                   purrr_1.2.1                      
+ [79] RCurl_1.98-1.14                   prettyunits_1.2.0                
+ [81] deldir_2.0-4                      pbapply_1.7-4                    
+ [83] viridis_0.6.5                     cowplot_1.2.0                    
+ [85] S4Vectors_0.36.0                  zoo_1.8-15                       
+ [87] SummarizedExperiment_1.28.0       ggrepel_0.9.8                    
+ [89] cluster_2.1.6                     magrittr_2.0.5                   
+ [91] data.table_1.18.2.1               RSpectra_0.16-2                  
+ [93] scattermore_1.2                   lmtest_0.9-40                    
+ [95] RANN_2.6.2                        ProtGenerics_1.30.0              
+ [97] fitdistrplus_1.2-6                matrixStats_1.5.0                
+ [99] hms_1.1.3                         patchwork_1.3.2                  
+[101] mime_0.13                         xtable_1.8-8                     
+[103] XML_3.99-0.17                     fastDummies_1.7.5                
+[105] IRanges_2.32.0                    gridExtra_2.3                    
+[107] compiler_4.2.3                    biomaRt_2.54.0                   
+[109] tibble_3.3.1                      maps_3.4.2                       
+[111] KernSmooth_2.23-24                crayon_1.5.3                     
+[113] ggpointdensity_0.1.0              htmltools_0.5.9                  
+[115] later_1.4.8                       tidyr_1.3.2                      
+[117] DBI_1.2.3                         tweenr_2.0.3                     
+[119] dbplyr_2.5.0                      rappdirs_0.3.4                   
+[121] MASS_7.3-60.0.1                   Matrix_1.6-4                     
+[123] cli_3.6.5                         parallel_4.2.3                   
+[125] dotCall64_1.2                     igraph_2.2.3                     
+[127] GenomicRanges_1.50.2              pkgconfig_2.0.3                  
+[129] GenomicAlignments_1.34.0          plotly_4.12.0                    
+[131] spatstat.sparse_3.1-0             xml2_1.3.6                       
+[133] XVector_0.38.0                    EnsDb.Hsapiens.v86_2.99.0        
+[135] stringr_1.6.0                     BSgenome.Hsapiens.UCSC.hg38_1.4.5
+[137] digest_0.6.39                     sctransform_0.4.3                
+[139] RcppAnnoy_0.0.23                  spatstat.data_3.1-9              
+[141] Biostrings_2.66.0                 fastmatch_1.1-8                  
+[143] uwot_0.2.4                        curl_5.1.0                       
+[145] restfulr_0.0.15                   shiny_1.13.0                     
+[147] Rsamtools_2.14.0                  rjson_0.2.21                     
+[149] lifecycle_1.0.5                   nlme_3.1-165                     
+[151] jsonlite_2.0.0                    mapproj_1.2.11                   
+[153] viridisLite_0.4.3                 BSgenome_1.66.3                  
+[155] pillar_1.11.1                     lattice_0.22-6                   
+[157] KEGGREST_1.38.0                   fastmap_1.2.0                    
+[159] httr_1.4.8                        survival_3.7-0                   
+[161] glue_1.8.0                        png_0.1-9                        
+[163] bit_4.6.0                         ggforce_0.4.2                    
+[165] stringi_1.8.7                     blob_1.2.4                       
+[167] RcppHNSW_0.6.0                    memoise_2.0.1                    
+[169] dplyr_1.2.1                       irlba_2.3.7                      
+[171] future.apply_1.20.2              

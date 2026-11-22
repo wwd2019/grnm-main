@@ -1,0 +1,20 @@
+{
+  "attempted_targets": 3846,
+  "fitted_targets": 3446,
+  "invalid_inference_models": 0,
+  "coefficient_tests": 1141828,
+  "significant_region_edges": 62354,
+  "TF_gene_edges": 49764,
+  "TFs": 738,
+  "target_genes": 3383,
+  "gene_modules": 1392,
+  "method": "Original Gaussian identity GLM; unscaled TF-expression x accessibility interactions",
+  "FDR": "BH across all estimable coefficients; threshold 0.05",
+  "TF_gene_pvalues": "pval_min and padj_min summarize significant region-level tests, not joint TF-gene tests",
+  "paper_features": 4342,
+  "features_without_v86_annotation": 496,
+  "models_with_aliased_terms": 3125,
+  "regulators_without_v86_target_names": 4,
+  "upstream_QC_label_field": "WGCNAcluster",
+  "method_deviation": "User-approved public WGCNAcluster labels replace unavailable author MainCellType labels in upstream rank-expression multinomial LASSO QC."
+}

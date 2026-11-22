@@ -1,0 +1,55 @@
+
+2026-11-18 17:06:48,152 - pyscenic.utils - INFO - Calculating Pearson correlations.
+
+2026-11-18 17:06:48,190 - pyscenic.utils - WARNING - Note on correlation calculation: the default behaviour for calculating the correlations has changed after pySCENIC verion 0.9.16. Previously, the default was to calculate the correlation between a TF and target gene using only cells with non-zero expression values (mask_dropouts=True). The current default is now to use all cells to match the behavior of the R verision of SCENIC. The original settings can be retained by setting 'rho_mask_dropouts=True' in the modules_from_adjacencies function, or '--mask_dropouts' from the CLI.
+	Dropout masking is currently set to [False].
+
+2026-11-18 17:06:55,063 - pyscenic.utils - INFO - Creating modules.
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+Running GLI3 cisTarget enrichment at exploratory NES >= 1.9
+
+2026-11-18 17:07:07,006 - pyscenic.prune - INFO - Using 2 workers.
+
+2026-11-18 17:07:07,006 - pyscenic.prune - INFO - Using 2 workers.
+
+2026-11-18 17:07:08,001 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): database loaded in memory.
+
+2026-11-18 17:07:08,001 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): database loaded in memory.
+
+2026-11-18 17:07:08,012 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): database loaded in memory.
+
+2026-11-18 17:07:08,012 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): database loaded in memory.
+
+2026-11-18 17:07:08,540 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): motif annotations loaded in memory.
+
+2026-11-18 17:07:08,540 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): motif annotations loaded in memory.
+
+2026-11-18 17:07:08,641 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): motif annotations loaded in memory.
+
+2026-11-18 17:07:08,641 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): motif annotations loaded in memory.
+
+2026-11-18 17:07:13,625 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): All regulons derived.
+
+2026-11-18 17:07:13,625 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): All regulons derived.
+
+2026-11-18 17:07:13,627 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): Done.
+
+2026-11-18 17:07:13,627 - pyscenic.prune - INFO - Worker hg38_10kbp_up_10kbp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): Done.
+
+2026-11-18 17:07:15,881 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): All regulons derived.
+
+2026-11-18 17:07:15,881 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): All regulons derived.
+
+2026-11-18 17:07:15,882 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): Done.
+
+2026-11-18 17:07:15,882 - pyscenic.prune - INFO - Worker hg38_500bp_up_100bp_down_full_tx_v10_clust.genes_vs_motifs.rankings(1): Done.
+Common universe 1794 benchmark positives 48
+ NES_cutoff annotation_filter  motif_module_rows  motif_supported_targets_all  targets_in_universe  top_k  hits hit_genes HES4_rank HES5_rank
+        3.0   all_annotations                  0                            0                    0      0   NaN                None      None
+        2.0   all_annotations                  3                           41                   16     10   1.0      GPC6      None      None
+        1.9       direct_only                  1                          234                   60     10   1.0      GPC6      None      None

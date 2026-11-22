@@ -1,0 +1,14 @@
+
+2026-11-18 17:12:27,352 - pyscenic.utils - INFO - Calculating Pearson correlations.
+
+2026-11-18 17:12:27,389 - pyscenic.utils - WARNING - Note on correlation calculation: the default behaviour for calculating the correlations has changed after pySCENIC verion 0.9.16. Previously, the default was to calculate the correlation between a TF and target gene using only cells with non-zero expression values (mask_dropouts=True). The current default is now to use all cells to match the behavior of the R verision of SCENIC. The original settings can be retained by setting 'rho_mask_dropouts=True' in the modules_from_adjacencies function, or '--mask_dropouts' from the CLI.
+	Dropout masking is currently set to [False].
+
+2026-11-18 17:12:34,220 - pyscenic.utils - INFO - Creating modules.
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+/home/wwd/miniconda3/envs/scprint/lib/python3.10/site-packages/pyscenic/utils.py:244: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  df = adjacencies.groupby(by=COLUMN_NAME_TARGET).apply(
+Modules: 4788 TFs: 1355

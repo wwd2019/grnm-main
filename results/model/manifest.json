@@ -1,0 +1,16 @@
+{
+  "seed": 42,
+  "common_genes": 1794,
+  "benchmark_positive": 48,
+  "train_TFs": 306,
+  "validation_TFs": 49,
+  "test_TFs": 49,
+  "train_edges": 5018,
+  "selected_model": "GRNM_32_drop0.1",
+  "selected_epoch": 20,
+  "selection": "mean per-TF AP on validation TFs; architecture & epoch chosen without GLI3 candidate table",
+  "negative_sampling": "four random unlisted pairs per known Pando edge, not verified negatives",
+  "train_features": "target degree excluding queried edge; RNA correlation; GRNBoost2 importance; motif similarity; TF and target in-degree",
+  "heldout_features": "all outgoing edges of validation TFs, test TFs and GLI3 excluded before feature construction",
+  "seed_rank_note": "Pando seed only reranking, full scores have no significance or motif-pruning cutoff"
+}

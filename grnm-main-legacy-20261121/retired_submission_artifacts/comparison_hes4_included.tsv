@@ -1,0 +1,6 @@
+method	edges	top10_hits	hit_genes	HES4_rank	HES5_rank
+Our Pando	29	1	PAX6	17	
+Original GRNM	30	1	PAX6	24	
+External Pando metacells	50	2	PAX6;HES5	26	9.0
+GRNBoost2 only	309	2	GPC6;PAX6	130	19.0
+pando+GRN	1794	3	HES5;PAX6;HES4	5	1.0

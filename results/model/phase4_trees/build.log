@@ -1,0 +1,3 @@
+grnm root 80 hubs ['HES5', 'PAX6', 'LHX2', 'DACH1', 'HES4', 'ID4'] downstream 30
+pando_metacells root 50 hubs ['DLX5', 'LEF1', 'NEUROD2', 'PAX6', 'MYCN', 'HES5'] downstream 26
+grnboost2 root 81 hubs ['MLLT10', 'BBX', 'PAX6', 'LHX2', 'RXRA', 'FOXP1', 'HES4', 'HES5'] downstream 40

@@ -1,0 +1,46 @@
+[
+  {
+    "method": "grnm",
+    "root_targets": 80,
+    "selected_hubs": [
+      "HES5",
+      "PAX6",
+      "LHX2",
+      "DACH1",
+      "HES4",
+      "ID4"
+    ],
+    "downstream_edges": 30,
+    "unsigned": true
+  },
+  {
+    "method": "pando_metacells",
+    "root_targets": 50,
+    "selected_hubs": [
+      "DLX5",
+      "LEF1",
+      "NEUROD2",
+      "PAX6",
+      "MYCN",
+      "HES5"
+    ],
+    "downstream_edges": 26,
+    "unsigned": false
+  },
+  {
+    "method": "grnboost2",
+    "root_targets": 81,
+    "selected_hubs": [
+      "MLLT10",
+      "BBX",
+      "PAX6",
+      "LHX2",
+      "RXRA",
+      "FOXP1",
+      "HES4",
+      "HES5"
+    ],
+    "downstream_edges": 40,
+    "unsigned": true
+  }
+]

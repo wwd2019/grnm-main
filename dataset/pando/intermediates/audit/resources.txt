@@ -1,0 +1,171 @@
+$Version
+[1] "1.1.1"
+
+$<NA>
+NULL
+
+$<NA>
+NULL
+
+$<NA>
+NULL
+
+     Package LibPath                                                       
+[1,] "Pando" "/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R/library"
+[2,] "Pando" "/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R/library"
+[3,] "Pando" "/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R/library"
+[4,] "Pando" "/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R/library"
+[5,] "Pando" "/home/wwd/miniconda3/envs/seurat4_env_restored/lib/R/library"
+     Item                                   Title
+[1,] "EnsDb.Hsapiens.v93.annot.UCSC.hg38"   ""   
+[2,] "SCREEN.ccRE.UCSC.hg38"                ""   
+[3,] "motif2tf"                             ""   
+[4,] "motifs"                               ""   
+[5,] "phastConsElements20Mammals.UCSC.hg38" ""   
+
+FUNCTION initiate_grn 
+function (object, ...) 
+{
+    UseMethod(generic = "initiate_grn", object = object)
+}
+<bytecode: 0x5f5c09a41f18>
+<environment: namespace:Pando>
+function (object, regions = NULL, peak_assay = "peaks", rna_assay = "RNA", 
+    exclude_exons = TRUE) 
+{
+    gene_annot <- Signac::Annotation(object[[peak_assay]])
+    if (is.null(gene_annot)) {
+        stop("Please provide a gene annotation for the ChromatinAssay.")
+    }
+    peak_ranges <- StringToGRanges(rownames(Seurat::GetAssay(object, 
+        assay = peak_assay)))
+    if (!is.null(regions)) {
+        cand_olaps <- findOverlaps(regions, peak_ranges)
+        cand_ranges <- pintersect(peak_ranges[subjectHits(cand_olaps)], 
+            regions[queryHits(cand_olaps)])
+    }
+    else {
+        cand_ranges <- peak_ranges
+    }
+    if (exclude_exons) {
+        exon_ranges <- gene_annot[gene_annot$type == "exon", 
+            ]
+        names(exon_ranges@ranges) <- NULL
+        exon_ranges <- IRanges::intersect(exon_ranges, exon_ranges)
+        exon_ranges <- GenomicRanges::GRanges(seqnames = exon_ranges@seqnames, 
+            ranges = exon_ranges@ranges)
+        cand_ranges <- GenomicRanges::subtract(cand_ranges, exon_ranges, 
+            ignore.strand = TRUE) %>% unlist()
+    }
+    peak_overlaps <- findOverlaps(cand_ranges, peak_ranges)
+    peak_matches <- subjectHits(peak_overlaps)
+    regions_obj <- new(Class = "Regions", ranges = cand_ranges, 
+        peaks = peak_matches, motifs = NULL)
+    params <- list(peak_assay = peak_assay, rna_assay = rna_assay, 
+        exclude_exons = exclude_exons)
+    grn_obj <- new(Class = "RegulatoryNetwork", regions = regions_obj, 
+        params = params)
+    object <- new(Class = "GRNData", grn = grn_obj, data = object)
+    return(object)
+}
+<bytecode: 0x5f5c0b93d4a0>
+<environment: namespace:Pando>
+
+FUNCTION find_motifs 
+function (object, ...) 
+{
+    UseMethod(generic = "find_motifs", object = object)
+}
+<bytecode: 0x5f5c09a74e88>
+<environment: namespace:Pando>
+
+FUNCTION infer_grn 
+function (object, ...) 
+{
+    UseMethod(generic = "infer_grn", object = object)
+}
+<bytecode: 0x5f5c09a4c160>
+<environment: namespace:Pando>
+
+FUNCTION find_modules 
+function (object, ...) 
+{
+    UseMethod(generic = "find_modules", object = object)
+}
+<bytecode: 0x5f5c09a6c828>
+<environment: namespace:Pando>
+
+METADATA ATAC_all_merged_srt.rds.metadata.rds 
+
+   4    7    9   11   16   21   26   31   61 
+ 519 1999 4458 4675 4987 6054 4910 5919 5436 
+
+   4    7    9   11   16   21   26   31   61 
+ 519 1999 4458 9662    0 6054 4910 5919 5436 
+
+409b2    H9 Hoik1 Wibj2  <NA> 
+ 7574 15480  4431 11397    75 
+
+ ATAC 
+38957 
+
+  ATAC_DAY11_SJ   ATAC_DAY16_SJ   ATAC_DAY21_SJ   ATAC_DAY26_SJ   ATAC_DAY31_SJ 
+           4675            4987            6054            4910            5919 
+   ATAC_DAY4_SJ ATAC_DAY61_2_SJ   ATAC_DAY61_SJ    ATAC_DAY7_SJ    ATAC_DAY9_SJ 
+            519            2537            2899            1999            4458 
+
+  ATAC_DAY11_SJ   ATAC_DAY16_SJ   ATAC_DAY21_SJ   ATAC_DAY26_SJ   ATAC_DAY31_SJ 
+           4675            4987            6054            4910            5919 
+   ATAC_DAY4_SJ ATAC_DAY61_2_SJ   ATAC_DAY61_SJ    ATAC_DAY7_SJ    ATAC_DAY9_SJ 
+            519            2537            2899            1999            4458 
+    
+     409b2   H9 Hoik1 Wibj2 <NA>
+  4     68  196   104   149    2
+  7    348  823   286   522   20
+  9    711 1954   550  1242    1
+  11   936 1941   530  1265    3
+  16  1638 2135   287   925    2
+  21   644 2666   708  2035    1
+  26   871 1978   550  1508    3
+  31  1498 2660   484  1266   11
+  61   860 1127   932  2485   32
+
+METADATA RNA_all_merged_srt.rds.metadata.rds 
+
+    4     7     9    11    16    18    21    26    31    61 
+ 1006  1511  1807  1797   408  9501  8707  6344  7296 11623 
+
+    4     7     9    11    16    18    21    26    31    61 
+ 1006  1511  1807  2205     0     0 18208  6344  7296 11623 
+
+409b2    H9 Hoik1 Wibj2  <NA> 
+ 6840 15813  5092 12754  9501 
+
+  RNA 
+50000 
+
+       RNA_DAY11_SJ        RNA_DAY16_SJ        RNA_DAY18_SJ        RNA_DAY21_SJ 
+               1797                 408                9501                8707 
+       RNA_DAY26_SJ        RNA_DAY31_SJ         RNA_DAY4_SJ  RNA_DAY61_fresh_SJ 
+               6344                7296                1006                8441 
+RNA_DAY61_frozen_SJ         RNA_DAY7_SJ         RNA_DAY9_SJ 
+               3182                1511                1807 
+
+       RNA_DAY11_SJ        RNA_DAY16_SJ        RNA_DAY18_SJ        RNA_DAY21_SJ 
+               1797                 408                9501                8707 
+       RNA_DAY26_SJ        RNA_DAY31_SJ         RNA_DAY4_SJ  RNA_DAY61_fresh_SJ 
+               6344                7296                1006                8441 
+RNA_DAY61_frozen_SJ         RNA_DAY7_SJ         RNA_DAY9_SJ 
+               3182                1511                1807 
+    
+     409b2   H9 Hoik1 Wibj2 <NA>
+  4    125  358   238   285    0
+  7    227  699   192   393    0
+  9    355  840   192   420    0
+  11   380  757   160   500    0
+  16   134  162    20    92    0
+  18     0    0     0     0 9501
+  21   954 3848   903  3002    0
+  26  1142 2385   803  2014    0
+  31  1630 3334   747  1585    0
+  61  1893 3430  1837  4463    0

@@ -1,0 +1,19 @@
+Loading required package: ggplot2
+Input:  /home/wwd/py_code/wwd/dongyifei_final/2026_11_16_GLI3/optimized_grnm_hes4/phase4_trees/pando_metacells_edges.csv
+Root:   GLI3
+Output: /home/wwd/py_code/wwd/dongyifei_final/2026_11_16_GLI3/optimized_grnm_hes4/phase4_trees/pando_metacells_tree.pdf
+Params: n1=50 hubs=6 n2=5
+Total edges loaded: 76
+Tree: L1=50 edges, L2=26 edges, L3=26 edges, total=76
+Highlights: ZIC3, ZNF608, CUX1, HES1, JARID2, MAF, PBX1, SIX6, SOX11, EMX2, TOX, ZIC2, SIX3, SMAD3, SOX4, SALL4, DACH1, RAX, SOX6, ZNF521, PAX6, CREB5, DMRTA1, HES4, HES5
+Direct GLI3 highlights: PAX6, HES5, HES4, DACH1
+Forced indirect highlights: PBX1, RAX, SMAD3, SOX4, ZNF521
+No two-hop GLI3 path for: ZIC3, ZNF608, CUX1, HES1, JARID2, MAF, SIX6, SOX11, EMX2, TOX, ZIC2, SIX3, SALL4, SOX6, CREB5, DMRTA1
+Warning message:
+In geom_edge_diagonal(aes(colour = factor(attr)), alpha = 0.5, linewidth = 0.25) :
+  Ignoring unknown parameters: `linewidth`
+Orphan highlights (存在但不可达, 单独小图): none
+Warning message:
+Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` in the `default_aes` field and elsewhere instead. 
+Done → /home/wwd/py_code/wwd/dongyifei_final/2026_11_16_GLI3/optimized_grnm_hes4/phase4_trees/pando_metacells_tree.pdf

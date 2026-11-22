@@ -1,0 +1,17 @@
+GRNM_32_drop0.1 val AP 0.2586877360308909 epoch 20
+GRNM_64_drop0.2 val AP 0.25508489971734233 epoch 10
+GRNM_64_drop0.4 val AP 0.25556216657312025 epoch 10
+all_targets hits 3 genes HES5,PAX6,HES4
+pando_seed_only hits 2 genes PAX6,HES4
+         method      split  TFs  mean_AP  mean_hits_top10  mean_AUROC
+  target_degree validation   49 0.114814         1.591837    0.882368
+  target_degree       test   49 0.109140         1.530612    0.875940
+      GRNBoost2 validation   49 0.090914         1.448980    0.637559
+      GRNBoost2       test   49 0.091411         1.448980    0.638292
+GRNM_32_drop0.1 validation   49 0.258688         3.346939    0.941004
+GRNM_32_drop0.1       test   49 0.285040         3.551020    0.935224
+GRNM_64_drop0.2 validation   49 0.255085         3.183673    0.939482
+GRNM_64_drop0.2       test   49 0.279783         3.469388    0.933688
+GRNM_64_drop0.4 validation   49 0.255562         3.285714    0.938274
+GRNM_64_drop0.4       test   49 0.278416         3.408163    0.933095
+selected: GRNM_32_drop0.1

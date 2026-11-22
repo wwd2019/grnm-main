@@ -1,0 +1,11 @@
+rank	target	score	hit	pando_seed
+1	PAX6	0.937604	True	True
+2	HES4	0.92323	True	True
+3	ID4	0.922542	False	True
+4	SOX2	0.88677776	False	True
+5	SLC1A3	0.8814461	False	True
+6	ZNF521	0.8605849	False	True
+7	HMGB2	0.85964864	False	True
+8	HES1	0.84373224	False	True
+9	DMRT3	0.80972826	False	True
+10	POU5F1	0.7734601	False	True

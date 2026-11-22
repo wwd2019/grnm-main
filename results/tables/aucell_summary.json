@@ -1,0 +1,19 @@
+{
+  "cells": 9327,
+  "ranking_genes": 33538,
+  "regulons": 377,
+  "matrix_shape": [
+    9327,
+    377
+  ],
+  "AUCell_auc_threshold": 0.05,
+  "seed": 42,
+  "weighted": false,
+  "normalize": false,
+  "GLI3_regulons": [],
+  "detected_genes_quantiles": {
+    "1%": 1663.04,
+    "5%": 2489.0,
+    "50%": 4745.0
+  }
+}

@@ -1,0 +1,7 @@
+# Saved pando+GRN model and comparisons
+
+`GLI3_all_scores.tsv` contains 1,794 ranked GLI3 candidate scores. `manifest.json` records the model setup and `validation_metrics.tsv` records grouped TF validation and test metrics. These metrics measure recovery of Pando-inferred edges, not independent experimental ground truth; the model's sigmoid output is an uncalibrated ranking score.
+
+`comparison_top10_four_methods.tsv` and `comparison_hes4_included_four_methods.tsv` compare Our Pando, pando+GRN, the Pando baseline and GRNBoost2 before SCENIC motif pruning, all within the same 1,794-gene universe. The candidate table was selected for the study and HES4 was added after inspection, so this is a targeted, descriptive comparison. pando+GRN uses GRNBoost2 importance as an input. HES4 and PAX6 already occur as first-stage Pando edges. The model does not establish a direct interaction or regulatory sign.
+
+The current one-panel figure is also available in `../figures/`; `phase4_trees/` holds the selected edge tables used to render separate circular trees. Other archived plots in this directory are exploratory and not the authoritative publication figures. Run `python src/visualization/plot_dot_matrix.py` or `python src/visualization/build_trees.py` from the repository root; regenerated outputs go to `results/generated/`. R packages are required for the tree renderers. See the root README and `docs/validation.md` for required inputs, execution and limitations.

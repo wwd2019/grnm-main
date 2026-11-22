@@ -1,0 +1,10 @@
+{
+  "modules": 4788,
+  "motif_rows": 2799,
+  "regulons": 377,
+  "regulon_TFs": 377,
+  "GLI3_regulons": [],
+  "NES_threshold": 3.0,
+  "rank_threshold": 5000,
+  "AUC_threshold": 0.05
+}
