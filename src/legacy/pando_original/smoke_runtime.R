@@ -1,0 +1,36 @@
+options(error=function(){traceback(20);quit(status=1)})
+suppressPackageStartupMessages({library(Seurat);library(Signac);library(Matrix);library(igraph)})
+set.seed(42)
+work<-'/home/wwd/py_code/mhr/final/new_grn'
+z<-readRDS(file.path(work,'coarse','matched_metacells.rds'))
+idx<-unlist(lapply(split(seq_len(ncol(z$expression)),z$metadata$line),function(i)sample(i,min(length(i),500))))
+features<-intersect(readRDS(file.path(work,'resources','full_timecourse_highly_variable_genes.rds')),rownames(z$expression))
+expr<-z$expression[features,idx,drop=FALSE];meta<-z$metadata[idx,,drop=FALSE];rm(z);gc()
+obj<-CreateSeuratObject(counts=CreateAssayObject(counts=expr),meta.data=meta)
+obj[['RNA']]<-SetAssayData(obj[['RNA']],layer='data',new.data=expr)
+obj<-ScaleData(obj,features=features,verbose=FALSE)
+obj<-RunPCA(obj,features=features,npcs=30,verbose=FALSE)
+for(f in list.files(file.path(work,'reference','simspec-master','R'),full.names=TRUE)) source(f)
+css<-cluster_sim_spectrum.default(expr,labels=meta$line,dr=Embeddings(obj,'pca')[,1:20],use_fast_rank=FALSE,verbose=TRUE)
+stopifnot(nrow(css)==ncol(expr),all(is.finite(css)))
+smoke_pcs<-min(20L,ncol(css),nrow(css)-1L)
+pcs<-prcomp(css,rank.=smoke_pcs)$x[,seq_len(smoke_pcs),drop=FALSE]
+knn<-FindNeighbors(pcs,compute.SNN=FALSE,k.param=10,verbose=FALSE)$nn
+g<-igraph::graph_from_adjacency_matrix(knn)
+terr<-lapply(igraph::ego(g,order=1,nodes=colnames(knn)[1:10]),igraph::as_ids)
+stopifnot(length(terr)==10,all(lengths(terr)>0))
+cat('CSS_PSEUDOCELL_API_OK cells=',nrow(css),' CSS_features=',ncol(css),'\n')
+p<-readRDS('/home/wwd/py_code/mhr/final/pando_zenodo15371701_from_atac_obj/peakMatrix_recovered.rds')
+p<-p[seq_len(10000),seq_len(800),drop=FALSE]
+po<-CreateSeuratObject(counts=CreateAssayObject(counts=p),assay='peaks',min.cells=0,min.features=0)
+VariableFeatures(po)<-rownames(p)[Matrix::rowSums(p)>0]
+po<-RunTFIDF(po,assay='peaks',verbose=FALSE)
+po<-RunSVD(po,assay='peaks',n=30,verbose=FALSE)
+po<-FindNeighbors(po,reduction='lsi',dims=1:20,verbose=FALSE)
+po<-FindClusters(po,resolution=100,algorithm=1,random.seed=42,verbose=FALSE)
+cat('LSI_LOUVAIN_API_OK clusters=',length(unique(Idents(po))),'\n')
+pfm<-readRDS(file.path(work,'resources','motifs.rds'))[1:5]
+regions<-StringToGRanges(rownames(p)[1:30],sep=c(':','-'))
+mm<-CreateMotifMatrix(features=regions,pwm=pfm,genome=BSgenome.Hsapiens.UCSC.hg38::BSgenome.Hsapiens.UCSC.hg38,use.counts=FALSE)
+stopifnot(nrow(mm)==length(regions),ncol(mm)==5)
+cat('MOTIF_API_OK\nRUNTIME_SMOKE_COMPLETE; subset checks only, not final GRN results.\n')

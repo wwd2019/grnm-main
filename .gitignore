@@ -1,0 +1,25 @@
+# Keep this release limited to source code and documentation.
+/dataset/
+/results/
+/grnm-main-legacy-20261121/
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.rds
+*.h5ad
+*.h5
+*.mtx
+*.pkl
+*.pt
+*.npz
+*.feather

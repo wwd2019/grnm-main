@@ -1,0 +1,12 @@
+work<-'/home/wwd/py_code/mhr/final/new_grn'
+packages<-c('Seurat','SeuratObject','Signac','Pando','glmnet','Matrix','matrixStats',
+ 'sparseMatrixStats','GenomicRanges','GenomeInfoDb','EnsDb.Hsapiens.v86',
+ 'BSgenome.Hsapiens.UCSC.hg38','motifmatchr','TFBSTools','irlba','igraph',
+ 'doParallel','foreach','RhpcBLASctl','data.table','jsonlite')
+versions<-vapply(packages,function(p)as.character(utils::packageVersion(p)),character(1))
+write.csv(data.frame(package=packages,version=unname(versions)),file.path(work,'results','software_versions.csv'),row.names=FALSE)
+writeLines(c(R.version.string,paste0('R_home=',R.home()),
+ paste0('conda_environment=',Sys.getenv('CONDA_DEFAULT_ENV')),
+ paste0('recorded_Asia_Shanghai=',format(Sys.time(),tz='Asia/Shanghai',usetz=TRUE))),
+ file.path(work,'results','execution_environment.txt'))
+cat('ENVIRONMENT_RECORDED\n')

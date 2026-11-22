@@ -1,0 +1,10 @@
+options(error=function(){traceback(15);quit(status=1)})
+suppressPackageStartupMessages({library(Matrix);library(glmnet);library(matrixStats)})
+work<-'/home/wwd/py_code/mhr/final/new_grn'
+z<-readRDS(file.path(work,'coarse','matched_metacells.rds'))
+qc<-readRDS(file.path(work,'qc','nowakowski_rank_lasso.rds'))
+mat<-as.matrix(z$expression[qc$genes,1:512,drop=FALSE])
+print(system.time(ranks<-t(matrixStats::colRanks(mat,ties.method='average',preserveShape=TRUE))))
+print(system.time(pred<-predict(qc$model,newx=ranks,s='lambda.1se',type='class')))
+stopifnot(length(pred)==512,all(as.character(pred)%in%qc$classes))
+cat('QC_SINGLE_BATCH_COMPLETE\n')

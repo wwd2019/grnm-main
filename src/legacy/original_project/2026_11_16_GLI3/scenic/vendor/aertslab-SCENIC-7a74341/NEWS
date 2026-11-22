@@ -1,0 +1,35 @@
+
+Version 1.2
+---------------
+- New function calcRSS(): to calculate the regulon specificity score
+- Renamed export2scope -> export2loom()
+- The scenicSettings object can now store the current status (e.g. last step run)
+- New function getStatus(): to know the last step run
+- Minor updates for compatibility with dependencies
+- Deprecated functions (will be removed in upcoming versions: 
+importAUCfromText(), importModulesGmt()  and the vignette "importing_pySCENIC.Rmd". 
+The results from pySCENIC/VSN can now be saved/loaded directly from a .loom file.
+
+Version 1.0
+---------------
+Version bump. Added export2scope() and the detailed tutorials for each of the step wrappers.
+
+Version 0.99.0
+---------------
+Compatibility with RcisTarget version published in Bioconductor (.feather databases)
+
+Version 0.1.5
+---------------
+Corrected error in plot_aucTsne()
+
+Version 0.1.3
+---------------
+Support for drosophila
+
+Version 0.1.1
+---------------
+First public version of the package.
+Still missing (but coming in the following days):
+- HTML version of tutorials
+- Help files
+- Tutorial for exploring the results

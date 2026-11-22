@@ -1,0 +1,9 @@
+suppressPackageStartupMessages(library(GenomicRanges))
+root<-'/home/wwd/py_code/mhr/final/new_grn'
+features<-readRDS(file.path(root,'resources','grn_features.rds'))
+genes<-readRDS(file.path(root,'resources','EnsDb.Hsapiens.v86.genes.hg38.rds'))
+targets<-intersect(features,genes$gene_name)
+files<-list.files(file.path(root,'fits'),pattern='^[0-9]+_.*\\.rds$')
+ids<-as.integer(sub('_.*','',files))
+missing<-setdiff(seq_along(targets),ids)
+print(data.frame(index=missing,target=targets[missing]))

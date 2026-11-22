@@ -1,0 +1,13 @@
+options(error=function(){traceback(15);quit(status=1)})
+suppressPackageStartupMessages(library(Seurat))
+root <- '/home/wwd/py_code/mhr/final';work<-file.path(root,'new_grn')
+x<-readRDS(file.path(root,'lines12_RNATAC16_26_integrated_v3scores_srt.rds'))
+sink(file.path(work,'audit','integrated_features.txt'),split=TRUE)
+cat('object misc\n');print(names(x@misc));cat('RNA misc\n');print(names(x[['RNA']]@misc))
+str(x[['RNA']]@misc$features,max.level=2)
+cat('RNA variable features',length(VariableFeatures(x[['RNA']])),'\n')
+print(head(colnames(x)))
+saveRDS(list(object_misc=x@misc,rna_misc=x[['RNA']]@misc,variable_features=VariableFeatures(x[['RNA']]),
+             metadata=x[[]],cells=colnames(x)),file.path(work,'audit','integrated_features.rds'))
+print(head(x[[]][,intersect(c('nowakowski_prediction','glyc_cluster','demux_modality','line'),colnames(x[[]])),drop=FALSE]))
+sink()

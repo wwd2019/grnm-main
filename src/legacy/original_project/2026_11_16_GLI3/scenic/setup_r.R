@@ -1,0 +1,8 @@
+lib <- normalizePath(commandArgs(trailingOnly=TRUE)[[1]],mustWork=TRUE)
+.libPaths(c(lib,.libPaths()))
+options(repos=c(CRAN="https://cloud.r-project.org"), timeout=180)
+if(!requireNamespace("BiocManager",quietly=TRUE)) install.packages("BiocManager",lib=lib)
+BiocManager::install(c("GENIE3","RcisTarget","AUCell"),lib=lib,ask=FALSE,update=FALSE)
+if(!requireNamespace("remotes",quietly=TRUE)) install.packages("remotes",lib=lib)
+remotes::install_github("aertslab/SCENIC",lib=lib,upgrade="never")
+stopifnot(all(vapply(c("SCENIC","GENIE3","RcisTarget","AUCell"),requireNamespace,logical(1),quietly=TRUE)))

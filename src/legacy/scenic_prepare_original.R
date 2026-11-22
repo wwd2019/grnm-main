@@ -1,0 +1,31 @@
+suppressPackageStartupMessages(library(Matrix))
+base <- normalizePath('..')
+here <- normalizePath('extended')
+x <- readRDS(file.path(base,'..','new_grn','audit','rnaMatrix.rds'))
+cells <- read.csv('cells.csv', stringsAsFactors=FALSE)
+idx <- match(cells$cell,colnames(x)); stopifnot(!anyNA(idx), !anyDuplicated(rownames(x)))
+x <- x[,idx,drop=FALSE]
+total <- Matrix::colSums(x); stopifnot(all(total>0))
+x <- x %*% Diagonal(x=10000/total)
+x@x <- log1p(x@x)
+mu <- Matrix::rowMeans(x)
+variance <- pmax(Matrix::rowMeans(x^2)-mu^2,0)
+detected <- Matrix::rowSums(x>0)/ncol(x)
+eligible <- which(detected >= 0.01 & variance > 0)
+# Rank dispersion within mean bins to avoid choosing only highly expressed genes.
+breaks <- unique(quantile(mu[eligible],probs=seq(0,1,length.out=21),na.rm=TRUE))
+bins <- cut(mu[eligible], breaks=breaks, include.lowest=TRUE, labels=FALSE)
+disp <- variance[eligible]/pmax(mu[eligible],1e-8)
+score <- ave(disp,bins,FUN=function(z) {s<-sd(z); if(is.na(s)||s==0) rep(0,length(z)) else (z-mean(z))/s})
+hvg <- eligible[order(score,decreasing=TRUE)][seq_len(min(5000,length(eligible)))]
+alltf <- readLines(file.path(here,'human_tfs_all.txt'))
+universe <- read.delim(file.path(base,'inputs','target_scores.tsv'))$target
+prior <- which((rownames(x) %in% universe & variance>0) | (rownames(x) %in% c(alltf,'GLI3') & detected>=0.01 & variance>0))
+keep <- sort(unique(c(hvg,prior))); genes <- rownames(x)[keep]
+stopifnot('GLI3' %in% genes)
+writeMM(x[keep,,drop=FALSE],file.path(here,'expression.mtx'))
+writeLines(genes,file.path(here,'genes.txt'))
+file.copy('cells.csv',file.path(here,'cells.csv'),overwrite=TRUE)
+writeLines(intersect(genes,alltf),file.path(here,'run','tfs.txt'))
+write.csv(data.frame(gene=rownames(x),detection=detected,mean=mu,variance=variance,selected=seq_len(nrow(x)) %in% keep,highly_variable=seq_len(nrow(x)) %in% hvg), file.path(here,'gene_selection.csv'),row.names=FALSE)
+cat('RNA cells:',ncol(x),'genes:',length(genes),'TFs:',length(intersect(genes,alltf)),'evaluation genes:',length(intersect(genes,universe)),'\n')

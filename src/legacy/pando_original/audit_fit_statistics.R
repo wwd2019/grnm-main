@@ -1,0 +1,18 @@
+options(error=function(){traceback(15);quit(status=1)})
+suppressPackageStartupMessages(library(data.table))
+root<-'/home/wwd/py_code/mhr/final/new_grn'
+files<-list.files(file.path(root,'fits'),pattern='^[0-9]+_.*\\.rds$',full.names=TRUE)
+records<-lapply(files,readRDS)
+statuses<-vapply(records,`[[`,character(1),'status')
+good<-records[statuses=='fit']
+qc<-rbindlist(lapply(good,`[[`,'qc'),fill=TRUE)
+co<-rbindlist(lapply(good,`[[`,'coefs'),fill=TRUE)
+diagnostics<-list(is_final=FALSE,completed_checkpoints=length(files),status_counts=as.list(table(statuses)),
+ fitted_models=nrow(qc),coefficient_rows=nrow(co),unconverged=sum(!qc$converged),
+ invalid_residual_df=sum(qc$residual_df<=0),invalid_inference=sum(!qc$inference_valid),
+ models_with_aliased_terms=sum(qc$aliased>0),maximum_predictors=max(qc$nvariables),
+ nonfinite_estimates=sum(!is.finite(co$estimate)),nonfinite_standard_errors=sum(!is.finite(co$std_err)),
+ nonpositive_standard_errors=sum(co$std_err<=0,na.rm=TRUE),
+ nonfinite_test_statistics=sum(!is.finite(co$statistic)),nonfinite_pvalues=sum(!is.finite(co$pval)))
+print(diagnostics)
+jsonlite::write_json(diagnostics,file.path(root,'audit','fit_statistics_progress.json'),auto_unbox=TRUE,pretty=TRUE)
