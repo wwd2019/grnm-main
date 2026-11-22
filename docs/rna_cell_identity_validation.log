@@ -1,5 +1,0 @@
-RNA count matrix: 33538 genes x 50000 cells
-Cell order exactly matches source RNA object: TRUE 
-Metadata order exactly matches source RNA object: TRUE 
-Maximum RNA per-cell count difference vs source metadata: 0 
-SCENIC cells all in source RNA and in AUCell order: 9327 

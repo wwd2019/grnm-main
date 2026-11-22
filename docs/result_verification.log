@@ -1,5 +1,0 @@
-Model scores: 1794 matched, maximum absolute difference 0
-adjacencies.tsv: matched (626359, 3)
-full/module_index.tsv: matched (4788, 5)
-full/regulon_targets.tsv.gz: matched (23892, 4)
-full/aucell_matrix.csv.gz: matched (9327, 377)
